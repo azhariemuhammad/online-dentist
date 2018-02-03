@@ -2,10 +2,16 @@ const express = require('express')
 const router = express.Router()
 
 const {
-  createUser
+  createUser,
+  getAllUsers,
+  findById
 } = require('../controllers/user_ctrl')
 
-router.get('/users', createUser)
+router.post('/users', createUser)
+
+router.get('/users', getAllUsers)
+
+router.get('/users/:id', findById)
 
 
 

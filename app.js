@@ -25,5 +25,8 @@ app.get('/', function(req, res){
 res.send('hello world')
 })
 
+const api = require('./routes/users_api')
+app.use('/api', api)
+
 
 app.listen(process.env.PORT || '3000')
