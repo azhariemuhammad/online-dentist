@@ -60,8 +60,56 @@ const findById = (req, res) => {
     })
 }
 
+const findByIdAndUpdate = (req, res) => {
+  User.findByIdAndUpdate(
+    {
+      _id: req.params.id
+    },
+    {
+      username: req.body.username,
+      email: req.body.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      age: req.body.age
+    }, {new: true})
+  .then(user => {
+    console.log('user: ', user)
+    res.status(200).json({
+      status: 'OK',
+      user
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({
+      status: 'BAD',
+      err
+    })
+  })
+}
+
+const findByIdAndRemove = (req, res) => {
+  User.findByIdAndRemove({_id: req.params.id})
+    .then(user => {
+      console.log('user: ', user)
+      res.status(200).json({
+        status: 'OK',
+        user
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({
+        status: 'BAD',
+        err
+      })
+    })
+}
+
 module.exports = {
   createUser,
   getAllUsers,
-  findById
+  findById,
+  findByIdAndUpdate,
+  findByIdAndRemove
 }
